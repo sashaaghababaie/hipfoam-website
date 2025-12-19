@@ -18,11 +18,11 @@ export default function HipDelivers() {
     <div className="bg-white border-b-4 border-zinc-300 relative flex h-svh max-h-[800px] flex-col">
       <div ref={ref} className="absolute top-0 left-0 h-[150vh] w-full"></div>
       <div
-        className={`relative top-24 flex justify-center text-black duration-1000 ${inView ? "-translate-y-24 opacity-100" : "opacity-0"}`}
+        className={`relative top-8 flex justify-center text-black duration-1000 ${inView ? "-translate-y-24 opacity-100" : "opacity-0"}`}
       >
         <div className="relative max-w-sm z-50 text-center">
-          <h1 className="mt-16 text-xl font-semibold">هیپ‌فوم</h1>
-          <h1 className="text-4xl mt-4 font-semibold">
+          <h1 className="mt-16 text-lg md:text-xl ">هیپ‌فوم</h1>
+          <h1 className="text-2xl md:text-4xl mt-4 font-semibold">
             ارائه‌دهنده راهکارهای نوین بسته‌بندی پلی اتیلن
           </h1>
         </div>

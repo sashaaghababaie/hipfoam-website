@@ -5,7 +5,7 @@ import { LazyShow } from "./lazy-show";
 import HipLogo from "./svg/hip-logo";
 
 const layerBaseClass =
-  "absolute -right-[400px] z-50 aspect-square w-[400px] origin-top border lg:-right-[600px] lg:w-[600px] will-change-transform";
+  "absolute w-[300px] -right-[300px] sm:-right-[400px] z-50 aspect-square sm:w-[400px] origin-top border lg:-right-[600px] lg:w-[600px] will-change-transform";
 
 const skewClass = "skew-x-12 skew-y-12";
 export default function Layers() {
@@ -67,7 +67,7 @@ export default function Layers() {
             />
           </div>
         </div>
-        <div className="h-[calc(100svh-64px)] min-h-[500px] sticky overflow-hidden w-full top-16">
+        <div className="h-[calc(100svh-64px)] min-h-[500px] border-b border-zinc-300 sticky overflow-hidden w-full top-16">
           <div className="w-full md:w-1/2 absolute z-60 px-4 top-0 left-0 h-full">
             <LazyShow inView={l1View}>
               <h2 className="mt-3 md:text-4xl text-black text-2xl font-black">
@@ -79,7 +79,7 @@ export default function Layers() {
               <LazyShow inView={l1View}>
                 <p className="mt-12 leading-loose text-gray-600">
                   ما در HIP FOAM بر اساس نیازهای لجستیک و حساسیت محصول شما،
-                  توانایی تولید پلاستیک حباب دار با 5 لایه محافظتی اختصاصی را
+                  توانایی تولید پلاستیک حباب دار با ۵ لایه محافظتی اختصاصی را
                   داریم که استحکام و ایمنی را به طور چشمگیری افزایش می‌دهد.
                   امکان اضافه کردن لایه آلومینیوم و چاپ طرح شما برای برندینگ نیز
                   وجود دارد.

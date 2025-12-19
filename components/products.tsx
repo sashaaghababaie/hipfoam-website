@@ -158,7 +158,7 @@ const ProductsMobile = () => {
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="w-1/2 min-w-[320px] max-w-[340px] absolute top-0 layer -left-12  border-zinc-300   max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
           <img src="./bubble.jpg" className="w-full  h-full object-cover" />
         </div>
@@ -179,7 +179,7 @@ const ProductsMobile = () => {
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="w-1/2 min-w-[320px] max-w-[340px] absolute -left-12 layer border-zinc-300 max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
           <img src="./strap.jpg" className="w-full h-full object-cover" />
         </div>
@@ -200,7 +200,7 @@ const ProductsMobile = () => {
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="w-1/2 min-w-[320px] max-w-[340px] absolute layer  -left-12 border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
           <img src="./stretch.jpg" className="w-full h-full object-cover" />
         </div>

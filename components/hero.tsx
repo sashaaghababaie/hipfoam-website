@@ -12,6 +12,7 @@ export const Hero = () => {
   });
   return (
     <div
+      id="top"
       ref={ref}
       className="relative bg-zinc-300 text-gray-800 flex h-svh min-h-[500px] w-full flex-col items-center justify-center overflow-hidden bg-linear-to-t from-zinc-100"
     >
@@ -60,7 +61,7 @@ export const Hero = () => {
       </div>
 
       <div className="absolute inset-0 z-40 mx-auto flex w-full max-w-[1200px] items-center px-4 py-12">
-        <div className="flex items-center w-full md:items-start flex-col">
+        <div className="flex justify-around items-center h-[calc(100svh-128px)] md:h-full w-full md:items-start flex-col">
           {/* <HipLogo width={280} className="fill-hip -mr-14 -mb-10" /> */}
           <div className="flex relative w-full justify-center md:justify-start gap-2 items-center">
             <div className="flex w-40 relative gap-2 items-center">
@@ -73,32 +74,33 @@ export const Hero = () => {
               </p>
             </div>
           </div>
+          <div className="">
+            {/* <h1 className="text-hipfoam text-5xl font-bold sm:text-7xl">هیپ فوم</h1> */}
+            <LazyShow inView={inView}>
+              <h2 className="text-hip-black text-center md:text-start max-w-md md:max-w-2xl mt-12 text-xl font-medium sm:text-3xl">
+                پیشرو در ارائه راهکارهای نوین بسته‌بندی پلی‌اتیلن
+              </h2>
+            </LazyShow>
 
-          {/* <h1 className="text-hipfoam text-5xl font-bold sm:text-7xl">هیپ فوم</h1> */}
-          <LazyShow inView={inView}>
-            <h2 className="text-hipfoam-black text-center md:text-start max-w-md md:max-w-2xl mt-12 text-xl font-medium sm:text-3xl">
-              پیشرو در ارائه راهکارهای نوین بسته‌بندی پلی‌اتیلن
-            </h2>
-          </LazyShow>
-
-          <LazyShow inView={inView}>
-            <p className="text-sm text-center md:text-start mt-6 max-w-md md:max-w-xl">
-              ما در HIP FOAM، با تخصص در تولید انواع{" "}
-              <span className="">پلاستیک حبابدار </span> و{" "}
-              <span className="">نایلون استرچ</span> چند لایه و عریض، متعهد به
-              تضمین ایمنی کالاهای شما هستیم. محصولات ما با کیفیت بالا و قابلیت
-              سفارشی‌سازی تولید می‌شوند تا دقیقاً نیازهای صنایع بزرگ، کارخانجات
-              و مصارف خانگی را در زمینه‌های مختلف برطرف کنند. و چند لایه و عریض
-              با قابلیت چاپ و کیفیت بالا برای مصارف صنعتی و خانگی
-            </p>
-          </LazyShow>
-          <div className="group mr-0 md:mr-24 relative mt-24 flex cursor-pointer items-center justify-center transition-transform duration-200 hover:scale-120">
+            <LazyShow inView={inView}>
+              <p className="text-sm text-center md:text-start mt-6 max-w-md md:max-w-xl">
+                ما در HIP FOAM، با تخصص در تولید انواع{" "}
+                <span className="">پلاستیک حبابدار </span> و{" "}
+                <span className="">نایلون استرچ</span> چند لایه و عریض، متعهد به
+                تضمین ایمنی کالاهای شما هستیم. محصولات ما با کیفیت بالا و قابلیت
+                سفارشی‌سازی تولید می‌شوند تا دقیقاً نیازهای صنایع بزرگ،
+                کارخانجات و مصارف خانگی را در زمینه‌های مختلف برطرف کنند. و چند
+                لایه و عریض با قابلیت چاپ و کیفیت بالا برای مصارف صنعتی و خانگی
+              </p>
+            </LazyShow>
+          </div>
+          <div className="group mr-0 md:mr-24 relative mt-8 md:mt-24 flex cursor-pointer items-center justify-center transition-transform duration-200 hover:scale-120">
             <p className=" absolute z-20 text-2xl font-bold group-hover:text-white">
               ثبت سفارش
             </p>
             <div className="orbit-wrapper aspect-square w-[150px] transform-gpu will-change-transform">
               <div className="orbit-item">
-                <div className="scale-up-and-orbit bg-hip/10 group-hover:bg-hip aspect-square w-full max-w-[200px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
+                <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-[200px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
                   <div
                     style={
                       {
@@ -110,7 +112,7 @@ export const Hero = () => {
                     className="orbit-wrapper aspect-square transform-gpu will-change-transform"
                   >
                     {/* <div className="orbit-item"> */}
-                    <div className="scale-up-and-orbit bg-hip/10 group-hover:bg-hip aspect-square w-full max-w-[100px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
+                    <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-[100px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
                       {/* <div
                           style={
                             {
@@ -120,7 +122,7 @@ export const Hero = () => {
                           }
                           className="orbit-wrapper aspect-square w-full max-w-[300px]">
                           <div className="orbit-item">
-                            <div className="scale-up-and-orbit bg-hip/10 aspect-square w-full max-w-[100px] rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform group-hover:bg-white/30"></div>
+                            <div className="scale-up-and-orbit bg-10 aspect-square w-full max-w-[100px] rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform group-hover:bg-white/30"></div>
                           </div>
                         </div> */}
                       {/* </div> */}

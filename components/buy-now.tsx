@@ -31,10 +31,10 @@ export default function BuyNow() {
         <div className="grow relative z-2 items-center  justify-center flex flex-col">
           <Button className="bg-white text-black p-8 font-black text-xl">
             <span className="leading-loose">
-              لیست قیمت
+              {/* لیست قیمت
               <br />
               و
-              <br />
+              <br /> */}
               سفارش
             </span>
             <FiArrowUpLeft className="inline text-2xl text-black" />

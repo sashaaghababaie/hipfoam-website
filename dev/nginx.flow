@@ -1,0 +1,228 @@
+on local
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+If you still have password SSH access, do this:
+ssh-copy-id username@YOUR_SERVER_IP
+
+
+Example:
+ssh-copy-id deploy@123.45.67.89
+
+
+This automatically appends your key to:
+~/.ssh/authorized_keys
+
+
+on the VPS.
+
+or
+
+cat ~/.ssh/id_rsa.pub
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+5️⃣ (Recommended) Secure SSH on the VPS
+
+Edit SSH config:
+
+sudo nano /etc/ssh/sshd_config
+
+
+Set / confirm:
+
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin no
+
+
+Restart SSH:
+
+sudo systemctl restart ssh
+
+===========
+
+optional auto config on ssh:
+nano ~/.ssh/config
+
+Host myvps
+  HostName SERVER_IP
+  User deploy
+  Port 1371
+  IdentityFile ~/.ssh/id_ed25519
+==============
+
+Switch to ED25519 (modern, faster, recommended)
+On your Mac
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+============
+Lock SSH to a custom port
+
+sudo nano /etc/ssh/sshd_config
+
+Port 1371
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin no
+
+=========
+
+
+sudo ufw allow 1371/tcp
+sudo ufw --force enable
+sudo ufw reload
+sudo ufw status
+sudo systemctl restart ssh
+
+===========
+
+for github CI
+
+
+On VPS
+su - deploy
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys
+
+
+Paste GitHub Actions public key (from repo secrets).
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+Recommended CI deploy user permissions
+sudo visudo
+
+
+Add:
+
+deploy ALL=(ALL) NOPASSWD: /bin/systemctl, /usr/bin/pm2
+==================
+Create an SSH key on the VPS (important)
+
+Log into VPS as deploy:
+
+ssh myvps
+
+
+Generate a key without passphrase (best for servers):
+
+ssh-keygen -t ed25519 -C "deploy@yourserver"
+
+
+Press Enter for everything
+→ creates:
+
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+
+2️⃣ Add VPS public key to GitHub
+
+On VPS:
+
+cat ~/.ssh/id_ed25519.pub
+
+
+Copy output.
+
+GitHub → Settings → SSH and GPG keys
+
+New SSH key
+
+Title: my-vps-deploy
+
+Paste the key
+
+Save
+===========================
+If repo is NOT cloned yet:
+git clone git@github.com:username/repo-name.git
+
+If repo already exists (using HTTPS):
+cd your-project
+git remote -v
+
+
+Change it:
+
+git remote set-url origin git@github.com:username/repo-name.git
+
+
+Verify:
+
+git remote -v
+======================
+
+deploy static
+
+sudo mkdir -p /www/example.com
+sudo chown -R deploy:deploy /www
+
+mv out/* /www/example.com/
+
+sudo nano /etc/nginx/sites-available/example.com
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name example.com www.example.com;
+
+    root /www/example.com;
+    index index.html;
+
+    # Gzip (important for Next.js)
+    gzip on;
+    gzip_types
+        text/plain
+        text/css
+        application/json
+        application/javascript
+        text/xml
+        application/xml
+        application/xml+rss
+        image/svg+xml;
+    gzip_min_length 1024;
+
+    # Cache static assets aggressively
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # Next.js _next files
+    location /_next/ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # SPA fallback (important for routing)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
+
+sudo ln -s /etc/nginx/sites-available/example.com \
+           /etc/nginx/sites-enabled/
+
+ sudo rm /etc/nginx/sites-enabled/default
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+sudo chown -R deploy:deploy /www/example.com
+sudo chmod -R 755 /www
+
+==========
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d example.com -d www.example.com
+sudo certbot renew --dry-run
+=======

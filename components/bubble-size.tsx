@@ -5,7 +5,7 @@ import BubbleRenderer from "./bubble-renderer";
 
 export default function BubbleSize() {
   const { ref, inView } = useInView({
-    rootMargin: "100% 0px -30% 0px",
+    rootMargin: "100% 0px -10% 0px",
   });
 
   return (
@@ -46,9 +46,9 @@ export default function BubbleSize() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="h-[calc(100svh-64px)] absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
-              <div className="rounded-full max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-2xl">
-                <div className="w-full">
+            <div className="h-[calc(100svh-64px)] overflow-hidden absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
+              <div className="rounded-full overflow-hidden max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-lg">
+                <div className="w-full overflow-hidden">
                   <div className="relative flex aspect-square w-full justify-between overflow-hidden rounded-full border border-dashed">
                     <BubbleRenderer spacingX={35} spacingY={35} />
                   </div>
@@ -77,9 +77,9 @@ export default function BubbleSize() {
                 className="relative z-1 w-full h-full object-contain"
               />
             </div>
-            <div className="h-[calc(100svh-64px)] absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
-              <div className="rounded-full max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-2xl">
-                <div className="w-full">
+            <div className="h-[calc(100svh-64px)] overflow-hidden absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
+              <div className="rounded-full overflow-hidden max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-lg">
+                <div className="w-full overflow-hidden">
                   <div className="relative flex aspect-square w-full justify-between overflow-hidden rounded-full border border-dashed">
                     <BubbleRenderer spacingX={55} spacingY={55} />
                   </div>
@@ -108,9 +108,9 @@ export default function BubbleSize() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="h-[calc(100svh-64px)] absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
-              <div className="rounded-full max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-2xl">
-                <div className="w-full">
+            <div className="h-[calc(100svh-64px)] overflow-hidden absolute top-1/2 flex items-center justify-center w-full z-40 px-4">
+              <div className="rounded-full overflow-hidden max-w-[300px] flex flex-col justify-between items-center p-2 h-full aspect-1/2 w-auto md:h-auto md:w-full md:aspect-1/2 bg-white/50 backdrop-blur-lg">
+                <div className="w-full overflow-hidden">
                   <div className="relative flex aspect-square w-full justify-between overflow-hidden rounded-full border border-dashed">
                     <BubbleRenderer spacingX={85} spacingY={85} />
                   </div>

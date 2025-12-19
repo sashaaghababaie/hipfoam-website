@@ -181,10 +181,10 @@ export default function Consultant() {
           <div className="z-10">
             <div className="flex flex-col justify-center items-center">
               <div className="py-24 max-w-sm relative z-2">
-                <h2 className="text-orange-600 text-center text-2xl">
+                <h2 className="text-orange-600 font-semibold text-center text-2xl">
                   برای انتخاب راهکار مناسب
                 </h2>
-                <h2 className=" text-white mt-4 font-black text-center text-4xl">
+                <h2 className=" text-white mt-8 font-black text-center text-4xl">
                   مشاوره تخصصی رایگان بگیرید
                 </h2>
               </div>

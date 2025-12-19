@@ -39,6 +39,12 @@ export const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="h-16">
+        <p className="text-gray-500 mt-12  text-center text-sm">
+          تمام حقوق برای هیپ‌فوم (حباب‌ایمن) محفوظ است
+        </p>
+        <p className="text-gray-500 text-center text-sm">۱۴۰۴</p>
+      </div>
     </footer>
   );
 };

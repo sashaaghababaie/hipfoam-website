@@ -47,7 +47,7 @@ export default function Cylinder() {
               </p>
 
               <LazyShow inView={inView}>
-                <div className="mt-12 flex flex-wrap gap-2">
+                <div className="mt-12 flex justify-center md:justify-start flex-wrap gap-2">
                   {sizes.map((d, i) => (
                     <div
                       key={i}
