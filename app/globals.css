@@ -3,13 +3,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --hip: 131 46 90;
+  --hip-black: 23 8 17;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-hip: rgb(var(--hip) / 1);
+  --color-hip-black: rgb(var(--hip-black) / 1);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-fa: "Modam", system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,3 +29,195 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: "Modam";
+  src: url("../public/fonts/ModamVF.woff2") format("woff2");
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  font-display: swap;
+  font-style: normal;
+
+  /* font-synthesis-weight: auto; */
+}
+
+@layer utilities {
+  .scroll-animate {
+    --p: 0;
+    --speed: 1;
+    --tx: 0px;
+    --ty: 0px;
+    --scale: 1;
+    --opacity: 1;
+
+    transform: translate3d(var(--tx), var(--ty), 0) scale(var(--scale));
+
+    opacity: var(--opacity);
+
+    will-change: transform, opacity;
+  }
+
+  .scroll-fade {
+    --opacity: calc(var(--p) * var(--speed));
+  }
+
+  .scroll-zoom {
+    --scale: calc(0 + var(--p) * var(--speed));
+  }
+
+  .scroll-zoom-2 {
+    --scale: calc(0 + var(--p) * var(--speed));
+  }
+
+  .layer {
+    transform: translate3d(0, calc(var(--p) * var(--speed) * -100px), 0);
+  }
+
+  .layer-left {
+    --speed: 0.8;
+  }
+  .layer-middle {
+    --speed: 3;
+  }
+  .layer-right {
+    --speed: 1.5;
+  }
+
+  .orbit-wrapper {
+    animation: orbit-rotate var(--float-duration, 6s) var(--float-ease, linear)
+      infinite;
+    animation-direction: var(--float-direction, normal);
+  }
+
+  .orbit-item {
+    transform: translateX(var(--float-radius, 12px)) translateY(1px);
+  }
+
+  .scale-up-and-orbit {
+    transform: scale(0);
+    animation: scale-up var(--duration, 0.7s) var(--easing, ease-out) forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes scale-up {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      /* transform: scale(1); */
+      transform: scale(var(--initial, 1));
+    }
+  }
+
+  .scale-up {
+    transform: scale(0);
+    animation: scale-up var(--duration, 0.7s) var(--easing, ease-out) forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* --- orbit (true circular float) --- */
+  @keyframes orbit-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes move-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(var(--spacing-x));
+    }
+  }
+
+  @keyframes move-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-1 * var(--spacing-x)));
+    }
+  }
+
+  .isometric-grid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transform: skewY(-30deg) rotate(30deg);
+  }
+
+  .isometric-row {
+    display: flex;
+    white-space: nowrap;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .isometric-row.odd {
+    animation: move-right var(--speed, 10) linear infinite;
+  }
+
+  .isometric-row.even {
+    animation: move-left var(--speed, 10) linear infinite;
+  }
+
+  .pause-rows .isometric-row {
+    animation-play-state: paused;
+  }
+
+  .iso-cell {
+    width: var(--spacing-x);
+    height: var(--spacing-y);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* #container {
+  height: 300px;
+  overflow-y: scroll;
+
+  scroll-timeline: --square-timeline y;
+  scroll-timeline: --square-timeline vertical;
+
+  position: relative;
+}
+
+#square {
+  background-color: deeppink;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+
+  animation: rotateAnimation 1ms linear;
+  animation-timeline: --square-timeline;
+}
+
+#stretcher {
+  height: 600px;
+  background: #dedede;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+} 
+
+ .anim-container {
+  scroll-timeline: --square-timeline y;
+  scroll-timeline: --square-timeline vertical;
+}
+
+.anim-section {
+  animation: rotateAnimation 1ms linear;
+  animation-timeline: --square-timeline;
+} 
+ */
