@@ -1,8 +1,8 @@
 "use client";
 import { useInView } from "react-intersection-observer";
 import { LazyShow } from "./lazy-show";
-import { localeNumber } from "../app/utiils/string";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { localeNumber } from "@/utils/string";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { CSSProperties } from "react";
 
 const sizes = [10, 16, 30, 60, 80, 100, 120, 150, 180, 200];

@@ -1,7 +1,7 @@
 "use client";
 
 import { CSSProperties } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { useInView } from "react-intersection-observer";
 import { LazyShow } from "./lazy-show";
 import CostumizeBubbleSVG from "./svg/customizable";

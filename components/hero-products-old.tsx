@@ -1,9 +1,10 @@
 "use client";
 import { CSSProperties } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { useInView } from "react-intersection-observer";
 import { LazyShow } from "./lazy-show";
 import HipLogo from "./svg/hip-logo";
+
 export default function HeroProducts() {
   return (
     <div className="h-[280svh] md:h-[200svh] relative">

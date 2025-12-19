@@ -1,6 +1,6 @@
 "use client";
-import { CSSProperties, useRef } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { CSSProperties } from "react";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 
 export default function Hero() {
   const { elRef, cnRef } = useScrollProgress({ start: 0.1, end: 0.5 });

@@ -7,6 +7,7 @@ export default function BubbleSize() {
   const { ref, inView } = useInView({
     rootMargin: "100% 0px -30% 0px",
   });
+
   return (
     <div ref={ref} className="min-h-[calc(100svh-64px)]">
       <div className="py-12 border-y border-zinc-300 flex flex-col items-center justify-center text-center">

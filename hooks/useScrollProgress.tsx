@@ -6,7 +6,7 @@ import {
   getRealScrollY,
   getVirtualScrollY,
   subscribeScroll,
-} from "../utiils/scroll-manager";
+} from "../utils/scroll-manager";
 
 export function useScrollProgress({
   start = 0,

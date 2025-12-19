@@ -53,7 +53,7 @@ import { useInView } from "react-intersection-observer";
 // }
 
 import { CSSProperties } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { LazyShow } from "./lazy-show";
 
 export default function AboutWhy() {

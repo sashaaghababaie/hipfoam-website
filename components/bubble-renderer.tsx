@@ -7,6 +7,7 @@ export default function BubbleRenderer({
 }) {
   const rows = Array.from({ length: 12 });
   const cols = Array.from({ length: 14 });
+
   return (
     <div className="absolute flex h-full w-full justify-center overflow-hidden">
       <div

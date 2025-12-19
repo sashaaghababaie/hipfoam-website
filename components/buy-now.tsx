@@ -1,6 +1,6 @@
 "use client";
 import { CSSProperties } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import Button from "./button";
 import { FiArrowUpLeft } from "react-icons/fi";
 

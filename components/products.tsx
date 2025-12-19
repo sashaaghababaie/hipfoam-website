@@ -1,7 +1,7 @@
 "use client";
 
 import { CSSProperties } from "react";
-import { useScrollProgress } from "../app/hooks/useScrollProgress";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 
 export const Products = () => {
   return (

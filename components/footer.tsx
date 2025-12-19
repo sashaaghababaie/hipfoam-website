@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-
 import HipLogo from "./svg/hip-logo";
+
 export const Footer = () => {
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
