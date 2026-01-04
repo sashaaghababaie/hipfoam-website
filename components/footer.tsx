@@ -69,7 +69,7 @@ export const Footer = () => {
 
           <a
             className="mt-8 hover:text-white/70 max-w-44 pr-2"
-            href="mailto:sales@hipfoam.com"
+            href="https://maps.google.com/?q=29.485417,52.538537"
           >
             شیراز، شهرک بزرگ صنعتی، میدان سوم، کوشش شمالی، خیابان ۱۱۲، پلاک ۷
           </a>

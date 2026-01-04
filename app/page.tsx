@@ -26,7 +26,7 @@ const JSON_LD = {
       "@id": `https://${siteConfig.domain}/#organization`,
       name: "هیپ‌فوم | HipFoam",
       url: `https://${siteConfig.domain}/`,
-      logo: `https://${siteConfig.domain}/large-icon.png`,
+      logo: `https://${siteConfig.domain}/android-chrome-192x192.png`,
       image: `https://${siteConfig.domain}/socials/og.jpg`,
       description: siteConfig.description,
 
