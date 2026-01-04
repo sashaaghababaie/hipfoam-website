@@ -247,7 +247,7 @@ const ProductsDesktop = () => {
                 className="w-[120%] relative max-w-150 overflow-hidden aspect-square rounded-full border border-zinc-300"
               >
                 <img
-                  src="./bubble.jpg"
+                  src="/bubble.webp"
                   className="w-full absolute top-0 h-full object-cover"
                 />
               </div>
@@ -255,7 +255,7 @@ const ProductsDesktop = () => {
             <div className="w-full layer layer-middle col-span-2 h-full overflow-hidden">
               <div className="w-[150%] border-zinc-300 relative right-1/2 translate-x-1/2 max-w-150 overflow-hidden aspect-square rounded-full border">
                 <img
-                  src="./strap.jpg"
+                  src="/strap.jpg"
                   className="w-full absolute top-0 h-full object-cover"
                 />
               </div>
@@ -263,7 +263,7 @@ const ProductsDesktop = () => {
             <div className="w-full layer layer-right col-span-2 h-full overflow-hidden">
               <div className="w-[170%] border-zinc-300 relative translate-x-1/2 max-w-150 aspect-square rounded-full overflow-hidden border">
                 <img
-                  src="./stretch.jpg"
+                  src="/stretch.jpg"
                   className="w-full absolute top-0 h-full object-cover"
                 />
               </div>
@@ -303,7 +303,7 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full absolute top-0 layer   border-zinc-300  right-1/2 translate-x-1/2 max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./bubble.jpg" className="w-full h-full object-cover" />
+          <img src="/bubble.webp" className="w-full h-full object-cover" />
         </div>
       </div>
       {/* 2 */}
@@ -320,7 +320,7 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full absolute  layer   border-zinc-300  right-1/2 translate-x-1/2 max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./strap.jpg" className="w-full h-full object-cover" />
+          <img src="/strap.jpg" className="w-full h-full object-cover" />
         </div>
       </div>
       {/* 3 */}
@@ -337,65 +337,66 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full absolute layer   border-zinc-300  right-1/2 translate-x-1/2 max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./stretch.jpg" className="w-full h-full object-cover" />
+          <img src="/stretch.jpg" className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
   );
 };
-const Products2 = () => {
-  const { elRef, cnRef } = useScrollProgress({ start: 0, end: 2 });
-  return (
-    <>
-      <div className="absolute max-w-300 left-1/2 -translate-x-1/2  *:border-zinc-300 grid grid-cols-7 top-[100svh] w-full h-svh z-1">
-        <div className="w-full border-r layer layer-left col-span-3 h-full  overflow-hidden"></div>
-        <div className="w-full border-r layer layer-middle  col-span-2 h-full overflow-hidden"></div>
-        <div className="w-full layer layer-right col-span-2 h-full overflow-hidden"></div>
-      </div>
-      <div
-        ref={cnRef}
-        className="absolute grid grid-cols-7 left-1/2 -translate-x-1/2 top-[150svh] max-w-300 w-full h-svh z-1"
-      >
-        <div className="w-full items-end h-full layer layer-left col-span-3 overflow-hidden">
-          <div
-            ref={elRef}
-            className="w-[50vw] items-center relative max-w-150 flex justify-center overflow-hidden aspect-square rounded-full border border-zinc-300"
-          >
-            <p
-              dir="rtl"
-              className="relative w-1/2 text-center font-bold font-boldd z-10 text-4xl text-white"
-            >
-              نایلون حباب‌دار
-            </p>
-            <img
-              src="./bubble.jpg"
-              ref={elRef}
-              className="w-full absolute top-0 h-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="w-full layer layer-middle col-span-2 h-full overflow-hidden">
-          <div className="w-[50vw] border-zinc-300 relative left-1/2 -translate-x-1/2 max-w-150 flex justify-center items-center overflow-hidden aspect-square rounded-full border">
-            <p
-              dir="rtl"
-              className="relative w-1/2 text-center font-bold font-boldd z-10 text-4xl text-white"
-            >
-              تسمه
-            </p>
-            <img
-              src="./strap.jpg"
-              ref={elRef}
-              className="w-full absolute top-0 h-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="w-full layer layer-right col-span-2 h-full overflow-hidden">
-          <div className="w-[50vw] border-zinc-300 relative -translate-x-1/2   max-w-150 aspect-square rounded-full border"></div>
-        </div>
-      </div>
-    </>
-  );
-};
+
+// const Products2 = () => {
+//   const { elRef, cnRef } = useScrollProgress({ start: 0, end: 2 });
+//   return (
+//     <>
+//       <div className="absolute max-w-300 left-1/2 -translate-x-1/2  *:border-zinc-300 grid grid-cols-7 top-[100svh] w-full h-svh z-1">
+//         <div className="w-full border-r layer layer-left col-span-3 h-full  overflow-hidden"></div>
+//         <div className="w-full border-r layer layer-middle  col-span-2 h-full overflow-hidden"></div>
+//         <div className="w-full layer layer-right col-span-2 h-full overflow-hidden"></div>
+//       </div>
+//       <div
+//         ref={cnRef}
+//         className="absolute grid grid-cols-7 left-1/2 -translate-x-1/2 top-[150svh] max-w-300 w-full h-svh z-1"
+//       >
+//         <div className="w-full items-end h-full layer layer-left col-span-3 overflow-hidden">
+//           <div
+//             ref={elRef}
+//             className="w-[50vw] items-center relative max-w-150 flex justify-center overflow-hidden aspect-square rounded-full border border-zinc-300"
+//           >
+//             <p
+//               dir="rtl"
+//               className="relative w-1/2 text-center font-bold font-boldd z-10 text-4xl text-white"
+//             >
+//               نایلون حباب‌دار
+//             </p>
+//             <img
+//               src="/bubble.webp"
+//               ref={elRef}
+//               className="w-full absolute top-0 h-full object-cover"
+//             />
+//           </div>
+//         </div>
+//         <div className="w-full layer layer-middle col-span-2 h-full overflow-hidden">
+//           <div className="w-[50vw] border-zinc-300 relative left-1/2 -translate-x-1/2 max-w-150 flex justify-center items-center overflow-hidden aspect-square rounded-full border">
+//             <p
+//               dir="rtl"
+//               className="relative w-1/2 text-center font-bold font-boldd z-10 text-4xl text-white"
+//             >
+//               تسمه
+//             </p>
+//             <img
+//               src="/strap.jpg"
+//               ref={elRef}
+//               className="w-full absolute top-0 h-full object-cover"
+//             />
+//           </div>
+//         </div>
+//         <div className="w-full layer layer-right col-span-2 h-full overflow-hidden">
+//           <div className="w-[50vw] border-zinc-300 relative -translate-x-1/2   max-w-150 aspect-square rounded-full border"></div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
 
 {
   /* <Section>

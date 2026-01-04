@@ -3,11 +3,13 @@
 // import { CSSProperties, useEffect, useRef, useState } from "react";
 // import { useScrollProgress } from "../hooks/useScrollProgress";
 import { useInView } from "react-intersection-observer";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Button from "./button";
 import { FiArrowUpLeft } from "react-icons/fi";
+import { Modal } from "./contact-modal";
 
 export default function Consultant() {
+  const [showModal, setShowModal] = useState(false);
   const { ref, inView } = useInView({
     rootMargin: "100% 0px -30% 0px",
     triggerOnce: true,
@@ -181,7 +183,7 @@ export default function Consultant() {
           <div className="z-10">
             <div className="flex flex-col justify-center items-center">
               <div className="py-24 max-w-sm relative z-2">
-                <h2 className="text-orange-600 font-semibold text-center text-2xl">
+                <h2 className="text-orange-600 rounded-full py-2 bg-white font-semibold text-center text-2xl">
                   برای انتخاب راهکار مناسب
                 </h2>
                 <h2 className=" text-white mt-8 font-black text-center text-4xl">
@@ -189,7 +191,10 @@ export default function Consultant() {
                 </h2>
               </div>
               <div className="grow relative z-2 items-center justify-center flex flex-col">
-                <Button className="bg-orange-600 backdrop-blur-2xl text-white p-4 font-black text-xl">
+                <Button
+                  onPointerDown={() => setShowModal(true)}
+                  className="bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer hover:bg-orange-500 text-white p-4 font-black text-xl"
+                >
                   دریافت مشاوره <FiArrowUpLeft className="inline text-2xl" />
                 </Button>
               </div>
@@ -203,6 +208,7 @@ export default function Consultant() {
           </div>
         </div>
       </div>
+      <Modal open={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

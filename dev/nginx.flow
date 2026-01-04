@@ -157,10 +157,30 @@ git remote -v
 
 deploy static
 
-sudo mkdir -p /www/example.com
-sudo chown -R deploy:deploy /www
+sudo mkdir -p /var/www/example.com
+sudo chown -R deploy:deploy /var/www
 
-mv out/* /www/example.com/
+rm -rf /var/www/hipfoam.com/*
+mv out/* /var/www/hipfoam.com/
+
+or
+
+rm -rf /www/hipfoam.com/* && mv out/* /www/hipfoam.com/ && sudo systemctl reload nginx
+
+or for zero down time
+mv out /www/hipfoam.com_new
+mv /www/hipfoam.com /www/hipfoam.com_old
+mv /www/hipfoam.com_new /www/hipfoam.com
+rm -rf /www/hipfoam.com_old
+
+then
+
+
+sudo systemctl reload nginx
+sudo chown -R deploy:deploy /www/hipfoam.com
+sudo chmod -R 755 /www/hipfoam.com
+
+
 
 sudo nano /etc/nginx/sites-available/example.com
 
@@ -226,3 +246,549 @@ sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d example.com -d www.example.com
 sudo certbot renew --dry-run
 =======
+
+
+
+
+bonus:
+
+deploy.sh:
+#!/usr/bin/env bash
+set -e
+
+APP_NAME="hipfoam.com"
+APP_DIR="$HOME/hipfoam/hipfoam-website"
+WWW_ROOT="/www"
+CURRENT="$WWW_ROOT/$APP_NAME"
+NEXT="$WWW_ROOT/${APP_NAME}_next"
+OLD="$WWW_ROOT/${APP_NAME}_old"
+
+echo "🚀 Deploy started..."
+
+cd "$APP_DIR"
+
+echo "📥 Pulling latest code..."
+git pull origin main
+
+echo "📦 Installing dependencies..."
+npm ci
+
+echo "🏗 Building Next.js..."
+npm run build
+
+echo "🧹 Preparing new release..."
+rm -rf "$NEXT"
+mv out "$NEXT"
+
+echo "🔁 Atomic swap..."
+mv "$CURRENT" "$OLD" || true
+mv "$NEXT" "$CURRENT"
+
+echo "🧽 Cleaning old release..."
+rm -rf "$OLD"
+
+echo "🔄 Reloading Nginx..."
+sudo systemctl reload nginx
+
+echo "✅ Deploy finished successfully!"
+
+chmod +x ~/deploy.sh
+./deploy.sh
+
+
+===============
+multi site nginx config:
+/www
+ ├── hipfoam.com
+ ├── site2.com
+ └── site3.com
+
+/etc/nginx
+ ├── snippets/
+ │    ├── security.conf
+ │    └── gzip.conf
+ ├── sites-available/
+ │    ├── hipfoam.com
+ │    └── site2.com
+ └── sites-enabled/
+
+/etc/nginx/snippets/gzip.conf
+
+gzip on;
+gzip_comp_level 6;
+gzip_min_length 1024;
+gzip_types
+  text/plain
+  text/css
+  application/json
+  application/javascript
+  text/xml
+  application/xml
+  application/xml+rss
+  image/svg+xml;
+
+
+/etc/nginx/snippets/security.conf
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+
+# HSTS (enable AFTER HTTPS)
+# add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+# CSP (safe default for static Next.js)
+add_header Content-Security-Policy "
+  default-src 'self';
+  img-src 'self' data: https:;
+  font-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline';
+" always;
+
+/etc/nginx/sites-available/hipfoam.com
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name hipfoam.com www.hipfoam.com;
+
+    root /www/hipfoam.com;
+    index index.html;
+
+    include snippets/gzip.conf;
+    include snippets/security.conf;
+
+    # Next.js build assets
+    location /_next/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # Static assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # SPA routing support
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/hipfoam.com /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+===================
+
+
+for github CI
+
+Awesome — this is now full production DevOps level 😄
+I’ll give you battle-tested configs, minimal magic, all copy-pasteable.
+
+1️⃣ 🤖 GitHub Actions auto-deploy (SSH → VPS)
+A) GitHub repo → Secrets
+
+Add these repo secrets:
+
+Name	Value
+VPS_HOST	your.server.ip
+VPS_USER	deploy
+VPS_PORT	1371
+VPS_SSH_KEY	private key of deploy (from VPS or local)
+
+⚠️ Use a dedicated deploy key, NOT your personal one.
+
+B) GitHub Actions workflow
+
+📁 .github/workflows/deploy.yml
+
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/hipfoam/hipfoam-website
+            ./deploy.sh
+
+
+✅ Push to main → auto deploy
+✅ No passwords
+✅ Fully secure
+
+2️⃣ 🔁 Rollback command (instant)
+
+Because we used atomic deploy, rollback is trivial.
+
+mv /www/hipfoam.com /www/hipfoam.com_broken
+mv /www/hipfoam.com_old /www/hipfoam.com
+sudo systemctl reload nginx
+
+
+Want a script?
+
+nano ~/rollback.sh
+
+#!/usr/bin/env bash
+set -e
+mv /www/hipfoam.com /www/hipfoam.com_failed
+mv /www/hipfoam.com_old /www/hipfoam.com
+sudo systemctl reload nginx
+echo "🔁 Rollback completed"
+
+chmod +x ~/rollback.sh
+
+3️⃣ 🔥 Fail2Ban (SSH & Nginx protection)
+
+Install:
+
+sudo apt install fail2ban
+
+SSH jail
+sudo nano /etc/fail2ban/jail.local
+
+[sshd]
+enabled = true
+port = 1371
+maxretry = 5
+findtime = 10m
+bantime = 1h
+
+
+Restart:
+
+sudo systemctl restart fail2ban
+
+
+Check:
+
+sudo fail2ban-client status sshd
+
+4️⃣ 🧱 Rate-limit + bot protection (Nginx)
+A) Define limits (global)
+
+📁 /etc/nginx/nginx.conf
+Inside http {}:
+
+limit_req_zone $binary_remote_addr zone=req_limit:10m rate=10r/s;
+limit_conn_zone $binary_remote_addr zone=conn_limit:10m;
+
+B) Apply per site
+
+📁 /etc/nginx/sites-available/hipfoam.com
+
+server {
+    ...
+
+    limit_req zone=req_limit burst=20 nodelay;
+    limit_conn conn_limit 20;
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    location ~* /(wp-admin|wp-login|xmlrpc|env|git) {
+        deny all;
+        return 444;
+    }
+}
+
+
+✔ Blocks scanners
+✔ Stops brute-force bots
+✔ No impact on real users
+
+Reload:
+
+sudo systemctl reload nginx
+
+5️⃣ 📊 Access logs per site (clean & useful)
+A) Per-site logs
+access_log /var/log/nginx/hipfoam.access.log;
+error_log  /var/log/nginx/hipfoam.error.log warn;
+
+
+Add inside server block.
+
+B) Log rotation (automatic)
+
+Check:
+
+sudo nano /etc/logrotate.d/nginx
+
+
+Default is fine, but ensure:
+
+weekly
+rotate 12
+compress
+delaycompress
+notifempty
+
+C) Live monitoring
+tail -f /var/log/nginx/hipfoam.access.log
+
+
+Or install GoAccess (optional):
+
+sudo apt install goaccess
+goaccess /var/log/nginx/hipfoam.access.log
+
+✅ Final Production Checklist
+
+✔ GitHub auto-deploy
+✔ Atomic deploy + rollback
+✔ SSH brute-force protection
+✔ Bot & rate-limit blocking
+✔ Per-site logs
+✔ Scales to 50+ sites
+✔ Ready for investors & clients
+
+Want next?
+
+🌍 Cloudflare (free WAF + CDN)
+
+🧠 Multi-environment (staging/prod)
+
+🚀 Blue-green deploy
+
+📦 Monorepo deploy strategy
+
+🔐 Secrets management
+
+Just say it 😎
+
+what is Blue-green deploy
+
+Great question — this is one of those concepts that sounds fancy but is actually very simple, especially for static sites 👍
+
+🌈 What is Blue–Green Deployment?
+
+Blue–Green deploy means:
+
+You keep two complete versions of your app live on the server
+and you instantly switch traffic between them.
+
+No partial updates.
+No broken state.
+Near zero downtime.
+
+🧠 The idea (very simple)
+BLUE   → current live version (users see this)
+GREEN  → new version being deployed & tested
+
+
+When GREEN is ready:
+
+👉 switch traffic
+👉 GREEN becomes live
+👉 BLUE becomes backup (rollback target)
+
+🔁 Visual example
+/www
+ ├── hipfoam.com_blue   ← live
+ ├── hipfoam.com_green  ← new build
+ └── hipfoam.com → symlink (points to blue or green)
+
+
+Nginx always serves:
+
+/www/hipfoam.com
+
+
+But that path is just a symlink.
+
+🚀 Deploy flow (step by step)
+
+Users are on BLUE
+
+You build into GREEN
+
+You test GREEN
+
+You switch symlink in 1 command
+
+Traffic moves instantly
+
+BLUE stays as rollback
+
+🔁 Why it’s powerful
+Problem	Solved
+Downtime	❌
+Half-built site	❌
+Broken cache	❌
+Fast rollback	✅
+Safe deploy	✅
+⚡ Switch is instant
+ln -sfn /www/hipfoam.com_green /www/hipfoam.com
+nginx -s reload
+
+
+This happens in milliseconds.
+
+🧪 Example for Next.js static export
+Folder layout
+/www
+ ├── hipfoam.com_blue
+ ├── hipfoam.com_green
+ └── hipfoam.com -> hipfoam.com_blue
+
+Build new version
+npm run build
+mv out /www/hipfoam.com_green
+
+
+Test locally:
+
+cd /www/hipfoam.com_green
+python3 -m http.server
+
+Switch live
+ln -sfn /www/hipfoam.com_green /www/hipfoam.com
+sudo systemctl reload nginx
+
+🔙 Rollback (1 command)
+ln -sfn /www/hipfoam.com_blue /www/hipfoam.com
+sudo systemctl reload nginx
+
+🆚 Blue–Green vs Atomic rename
+Method	Rollback	Safety	Used by
+Atomic rename	Medium	High	Small setups
+Blue–Green	Instant	Very High	Big companies
+In-place copy	❌	❌	Avoid
+🧱 When should YOU use it?
+
+Use Blue–Green if:
+
+You deploy often
+
+You want instant rollback
+
+You host many static sites
+
+You want zero risk deploys
+
+For your setup (many Next.js static sites) → perfect fit 👌
+
+🧠 Mental model (remember this)
+
+“I never touch what users are seeing
+I only switch pointers.”
+
+That’s Blue–Green.
+
+If you want next, I can:
+
+🔧 Convert your deploy script to Blue–Green
+
+🤖 Integrate it with GitHub Actions
+
+🔐 Add health checks before switching
+
+📊 Add deploy logging
+
+Just say the word 🚀
+
+
+
+
+
+
+
+server {
+    server_name hipfoam.com www.hipfoam.com;
+
+    root /www/hipfoam.com;
+    index index.html;
+
+    # Gzip (important for Next.js)
+    gzip on;
+    gzip_types
+        text/plain
+        text/css
+        application/json
+        application/javascript
+        text/xml
+        application/xml
+        application/xml+rss
+        image/svg+xml;
+    gzip_min_length 1024;
+
+    # Cache static assets aggressively
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # Next.js _next files
+    location /_next/ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # SPA fallback (important for routing)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/hipfoam.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/hipfoam.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+server {
+    if ($host = www.hipfoam.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = hipfoam.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name hipfoam.com www.hipfoam.com;
+    return 404; # managed by Certbot
+
+
+
+
+}

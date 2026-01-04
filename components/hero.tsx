@@ -2,14 +2,18 @@
 
 import { useInView } from "react-intersection-observer";
 import { LazyShow } from "./lazy-show";
-
+import { Modal } from "./contact-modal";
 import HipSign from "./svg/logo-sign";
+import { useState } from "react";
 
 export const Hero = () => {
+  const [show, setShow] = useState(false);
+
   const { ref, inView } = useInView({
     rootMargin: "0% 0px 0% 0px",
     initialInView: false,
   });
+
   return (
     <div
       id="top"
@@ -23,7 +27,10 @@ export const Hero = () => {
  */}
 
       <div className="absolute inset-0 mx-auto h-full max-w-[400px] opacity-90 sm:max-w-[500px]">
-        <div dir="ltr" className="relative h-full w-full -translate-x-1/2">
+        <div
+          dir="ltr"
+          className="relative h-full w-full -translate-x-1/4 md:-translate-x-1/2"
+        >
           <div className="bg-hip absolute top-16 right-44 aspect-square h-2/3 rounded-full blur-3xl" />
           <div className="absolute top-1/3 left-12 aspect-square h-1/2 rounded-full bg-orange-600/50 blur-3xl" />
         </div>
@@ -54,20 +61,19 @@ export const Hero = () => {
           <div className="scale-up-and-orbit z-10 h-full w-full rounded-full bg-white/80 mask-[radial-gradient(circle,transparent_0%,transparent_10%,black_90%)]"></div>
         </div>
       </div>
-      <div className="orbit-wrapper absolute aspect-square w-full max-w-[400px] min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-50 blur-sm sm:max-w-[550px]">
+      <div className="orbit-wrapper absolute aspect-square w-full max-w-[400px] min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-60 blur-sm sm:max-w-[550px]">
         <div className="orbit-item h-full w-full">
           <div className="scale-up-and-orbit z-10 h-full w-full rounded-full bg-white/80 mask-[radial-gradient(circle,transparent_0%,transparent_10%,black_90%)]"></div>
         </div>
       </div>
 
-      <div className="absolute inset-0 z-40 mx-auto flex w-full max-w-[1200px] items-center px-4 py-12">
-        <div className="flex justify-around items-center h-[calc(100svh-128px)] md:h-full w-full md:items-start flex-col">
+      <div className="absolute inset-0  z-40 mx-auto flex w-full max-w-[1200px] items-center px-4 py-12">
+        <div className="flex justify-around items-center h-[calc(100svh-128px)] w-full md:items-start flex-col">
           {/* <HipLogo width={280} className="fill-hip -mr-14 -mb-10" /> */}
           <div className="flex relative w-full justify-center md:justify-start gap-2 items-center">
             <div className="flex w-40 relative gap-2 items-center">
               <HipSign width={100} className="fill-hip" />
-              <p className="right-18 font-semibold text-xl absolute">
-                {" "}
+              <p className="right-18 text-hip-black font-semibold text-xl absolute">
                 هیپ‌
                 <br />
                 فــوم
@@ -89,12 +95,14 @@ export const Hero = () => {
                 <span className="">نایلون استرچ</span> چند لایه و عریض، متعهد به
                 تضمین ایمنی کالاهای شما هستیم. محصولات ما با کیفیت بالا و قابلیت
                 سفارشی‌سازی تولید می‌شوند تا دقیقاً نیازهای صنایع بزرگ،
-                کارخانجات و مصارف خانگی را در زمینه‌های مختلف برطرف کنند. و چند
-                لایه و عریض با قابلیت چاپ و کیفیت بالا برای مصارف صنعتی و خانگی
+                کارخانجات و مصارف خانگی را در زمینه‌های مختلف برطرف کنند.
               </p>
             </LazyShow>
           </div>
-          <div className="group mr-0 md:mr-24 relative mt-8 md:mt-24 flex cursor-pointer items-center justify-center transition-transform duration-200 hover:scale-120">
+          <div
+            onPointerDown={() => setShow(true)}
+            className="group mr-0 md:mr-24 relative mt-8 md:mt-24 flex cursor-pointer items-center justify-center transition-transform duration-200 hover:scale-120"
+          >
             <p className=" absolute z-20 text-2xl font-bold group-hover:text-white">
               ثبت سفارش
             </p>
@@ -134,6 +142,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+      <Modal open={show} onClose={() => setShow(false)} />
     </div>
   );
 };

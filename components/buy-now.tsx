@@ -3,10 +3,12 @@ import { CSSProperties } from "react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import Button from "./button";
 import { FiArrowUpLeft } from "react-icons/fi";
+import { useState } from "react";
+import { Modal } from "./contact-modal";
 
 export default function BuyNow() {
   const { elRef, cnRef } = useScrollProgress({ start: 0, end: 0.8 });
-
+  const [showModal, setShowModal] = useState(false);
   return (
     <div
       id="contact"
@@ -29,7 +31,10 @@ export default function BuyNow() {
           </h2>
         </div>
         <div className="grow relative z-2 items-center  justify-center flex flex-col">
-          <Button className="bg-white text-black p-8 font-black text-xl">
+          <Button
+            onClick={() => setShowModal(true)}
+            className="bg-white transition-all duration-300 hover:scale-110 text-black hover:text-zinc-500  p-8 font-black text-xl"
+          >
             <span className="leading-loose">
               {/* لیست قیمت
               <br />
@@ -37,10 +42,11 @@ export default function BuyNow() {
               <br /> */}
               سفارش
             </span>
-            <FiArrowUpLeft className="inline text-2xl text-black" />
+            <FiArrowUpLeft className="inline text-2xl" />
           </Button>
         </div>
       </div>
+      <Modal open={showModal} onClose={() => setShowModal(false)} />
     </div>
     // <div className="h-svh">
     //   {" "}

@@ -5,10 +5,10 @@ import { useScrollProgress } from "@/hooks/useScrollProgress";
 
 export const Products = () => {
   return (
-    <>
+    <div className="scroll-m-8" id="products">
       <ProductsDesktop />
       <ProductsMobile />
-    </>
+    </div>
   );
 };
 
@@ -17,12 +17,12 @@ const ProductsDesktop = () => {
 
   return (
     <div
-      id="products"
       ref={cnRef}
-      className="hidden overflow-none md:flex bg-zinc-100 relative justify-center w-full h-[150svh]"
+      className="hidden overflow-hidden md:flex bg-zinc-100 relative justify-center w-full h-[150svh]"
     >
+      <div className="absolute inset-0 bg-dots-diagonal" />
       {/* <div className="absolute bg-zinc-100 inset-0" /> */}
-      <div className="flex w-full justify-center max-w-300">
+      <div className="flex w-full  justify-center max-w-300">
         <div
           style={{ "--speed": 4 } as CSSProperties}
           className="flex layer flex-col gap-y-8 w-1/3 items-center h-full justify-center"
@@ -37,11 +37,15 @@ const ProductsDesktop = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-hip rounded-full w-3 h-3"></div>
-              <p>تسمه PET</p>
+              <p>نایلون استرچ</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-hip rounded-full w-3 h-3"></div>
-              <p>نایلون استرچ</p>
+              <p>نایلون شرینک</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="bg-hip rounded-full w-3 h-3"></div>
+              <p>تسمه PP</p>
             </div>
           </div>
         </div>
@@ -63,7 +67,7 @@ const ProductsDesktop = () => {
             >
               <div className="bg-white/30 backdrop-blur-sm w-auto aspect-square flex p-2 items-center justify-center rounded-full">
                 <p className="relative text-center font-bold z-10 text-2xl lg:text-3xl text-black">
-                  تسمه PET
+                  تسمه PP
                 </p>
               </div>
             </div>
@@ -89,7 +93,7 @@ const ProductsDesktop = () => {
                   className="w-[120%] relative max-w-150 overflow-hidden aspect-square rounded-full border border-zinc-300"
                 >
                   <img
-                    src="./bubble.jpg"
+                    src="/bubble.webp"
                     className="w-full absolute top-0 h-full object-cover"
                   />
                 </div>
@@ -102,7 +106,7 @@ const ProductsDesktop = () => {
               >
                 <div className="w-[170%] border-zinc-300 relative right-1/2 translate-x-1/2 max-w-150 overflow-hidden aspect-square rounded-full border">
                   <img
-                    src="./strap.jpg"
+                    src="/strap.jpg"
                     className="w-full absolute top-0 h-full object-cover"
                   />
                 </div>
@@ -115,7 +119,7 @@ const ProductsDesktop = () => {
               >
                 <div className="w-[170%] border-zinc-300 relative translate-x-1/2 max-w-150 aspect-square rounded-full overflow-hidden border">
                   <img
-                    src="./stretch.jpg"
+                    src="/stretch.jpg"
                     className="w-full absolute top-0 h-full object-cover"
                   />
                 </div>
@@ -133,8 +137,9 @@ const ProductsMobile = () => {
   return (
     <div
       ref={cnRef}
-      className="flex border-t bg-zinc-100 py-8 border-zinc-300 justify-around md:hidden relative w-full flex-col h-[150svh]"
+      className="flex overflow-hidden border-t bg-zinc-100 py-8 border-zinc-300 justify-around md:hidden relative w-full flex-col h-[150svh]"
     >
+      <div className="absolute bg-amber-100 inset-0 bg-dots-diagonal" />
       <h2
         // style={{ "--speed": 1 } as CSSProperties}
         className="w-full text-black text-center layer font-bold mb-12 text-4xl"
@@ -160,7 +165,7 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./bubble.jpg" className="w-full  h-full object-cover" />
+          <img src="/bubble.webp" className="w-full  h-full object-cover" />
         </div>
       </div>
       {/* 2 */}
@@ -170,7 +175,7 @@ const ProductsMobile = () => {
           className="bg-white/30 min-w-44 left-1/3 absolute top-0 layer z-2 mt-44 backdrop-blur-sm w-fit aspect-square flex p-2 items-center justify-center rounded-full"
         >
           <p className="relative text-center font-bold z-10 text-2xl lg:text-4xl text-black">
-            تسمه PET
+            تسمه PP
           </p>
         </div>{" "}
         <div
@@ -181,17 +186,20 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./strap.jpg" className="w-full h-full object-cover" />
+          <img src="/strap.jpg" className="w-full h-full object-cover" />
         </div>
       </div>
       {/* 3 */}
       <div className="p-8 relative h-1/4 mb-12">
         <div
           style={{ "--speed": 2 } as CSSProperties}
-          className="bg-white/30 absolute min-w-44 left-1/3 layer z-2 mt-44 backdrop-blur-sm w-fit aspect-square flex p-2 items-center justify-center rounded-full"
+          className="bg-white/30 absolute flex-col min-w-44 left-1/3 layer z-2 mt-44 backdrop-blur-sm w-fit aspect-square flex p-2 items-center justify-center rounded-full"
         >
           <p className="relative text-center font-bold z-10 text-2xl lg:text-4xl text-black">
             نایلون استرچ
+          </p>
+          <p className="relative text-center font-bold z-10 text-2xl lg:text-4xl text-black">
+            نایلون شرینک
           </p>
         </div>
         <div
@@ -202,7 +210,7 @@ const ProductsMobile = () => {
           style={{ "--speed": 0 } as CSSProperties}
           className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="./stretch.jpg" className="w-full h-full object-cover" />
+          <img src="/stretch.jpg" className="w-full h-full object-cover" />
         </div>
       </div>
     </div>

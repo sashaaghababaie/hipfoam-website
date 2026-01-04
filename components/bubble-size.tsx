@@ -37,7 +37,7 @@ export default function BubbleSize() {
       </div>
       {/* <div className="h-auto md:h-[200svh]"> */}
       <div className="">
-        <div className="grid relative md:sticky md:top-16 grid-cols-1 border-zinc-300 md:grid-cols-3 border-b">
+        <div className="grid relative md:sticky text-hip-black md:top-16 grid-cols-1 border-zinc-300 md:grid-cols-3 border-b">
           <div className="w-full relative h-[200svh] border-l border-zinc-300">
             <div className="w-full sticky overflow-hidden top-16 h-[calc(100svh-64px)]">
               <div className="w-full left-1/2 -translate-x-1/2 h-auto md:h-full md:w-auto z-0 absolute aspect-square rounded-full bg-black/5" />
