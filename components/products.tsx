@@ -160,13 +160,13 @@ const ProductsMobile = () => {
         </div>
         <div
           style={{ "--speed": 6 } as CSSProperties}
-          className="bg-hip w-32 left-1/3 absolute top-32 layer mt-24 z-1  backdrop-blur-sm  aspect-square flex p-2 items-center justify-center rounded-full"
+          className="bg-hip w-32 left-1/3 absolute top-32 layer mt-24 z-1 backdrop-blur-sm  aspect-square flex p-2 items-center justify-center rounded-full"
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-85 absolute top-0 layer -left-12  border-zinc-300 md:max-w-150 overflow-hidden aspect-square rounded-full border"
         >
-          <img src="/bubble.webp" className="w-full  h-full object-cover" />
+          <img src="/bubble.webp" className="w-full h-full object-cover" />
         </div>
       </div>
       {/* 2 */}
@@ -185,7 +185,7 @@ const ProductsMobile = () => {
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-85 absolute top-0 layer -left-12  border-zinc-300 md:max-w-150 overflow-hidden aspect-square rounded-full border"
         >
           <img src="/strap.jpg" className="w-full h-full object-cover" />
         </div>
@@ -209,7 +209,7 @@ const ProductsMobile = () => {
         ></div>
         <div
           style={{ "--speed": 0 } as CSSProperties}
-          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-[340px] absolute top-0 layer -left-12  border-zinc-300  max-w-150 overflow-hidden aspect-square rounded-full border"
+          className="h-full sm:h-auto w-auto sm:w-1/2 max-w-85 absolute top-0 layer -left-12  border-zinc-300 md:max-w-150 overflow-hidden aspect-square rounded-full border"
         >
           <img src="/stretch.jpg" className="w-full h-full object-cover" />
         </div>

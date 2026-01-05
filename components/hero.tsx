@@ -67,7 +67,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute inset-0  z-40 mx-auto flex w-full max-w-[1200px] items-center px-4 py-12">
+      <div className="absolute inset-0  z-40 mx-auto flex w-full max-w-300 items-center px-4 py-12">
         <div className="flex justify-around items-center h-[calc(100svh-128px)] w-full md:items-start flex-col">
           {/* <HipLogo width={280} className="fill-hip -mr-14 -mb-10" /> */}
           <div className="flex relative w-full justify-center md:justify-start gap-2 items-center">

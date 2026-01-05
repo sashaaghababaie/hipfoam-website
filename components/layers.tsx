@@ -45,7 +45,7 @@ export default function Layers() {
 
   return (
     <div className="w-full h-[300svh] relative px-4">
-      <div className="w-1/2 absolute h-full top-0 border-r border-zinc-300 left-[1px] " />
+      <div className="w-1/2 absolute h-full top-0 border-r border-zinc-300 left-px " />
       <div className="h-full pt-24 max-w-300 border-x border-zinc-300 mx-auto relative">
         <div className="h-[300svh] absolute w-full left-0 top-0">
           <div className="relative w-full h-full">
@@ -63,7 +63,7 @@ export default function Layers() {
             />
             <div
               ref={l4}
-              className="absolute border-t border-zinc-300 w-full top-[200svh] h-[100svh]"
+              className="absolute border-t border-zinc-300 w-full top-[200svh] h-svh"
             />
             <div
               ref={l5}
@@ -71,7 +71,7 @@ export default function Layers() {
             />
           </div>
         </div>
-        <div className="h-[calc(100svh-64px)] min-h-[500px] border-b border-zinc-300 sticky overflow-hidden w-full top-16">
+        <div className="h-[calc(100svh-64px)] min-h-125 border-b border-zinc-300 sticky overflow-hidden w-full top-16">
           <div className="w-full md:w-1/2 absolute z-60 px-4 top-0 left-0 h-full">
             <LazyShow inView={l1View}>
               <h2 className="mt-3 md:text-4xl text-black text-2xl font-black">
@@ -124,21 +124,21 @@ export default function Layers() {
               //   style={{
               //     transform: `skewX(12deg) skewY(12deg) translateX(${(entry1?.intersectionRatio || 1) * -100}%)`,
               //   }}
-              className={`${layerBaseClass} ${skewClass} ${l1View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu duration-200 transition-transform top-[140px] -rotate-45 bg-linear-to-r from-zinc-500 to-zinc-200 lg:-top-[4%]`}
+              className={`${layerBaseClass} ${skewClass} ${l1View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu duration-200 transition-transform top-35 -rotate-45 bg-linear-to-r from-zinc-500 to-zinc-200 lg:-top-[4%]`}
             >
               {/* {entry1?.intersectionRatio} */}
             </div>
             <div
-              className={`${layerBaseClass} ${skewClass} ${l2View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-[132px] -rotate-45 lg:-top-[6%]`}
+              className={`${layerBaseClass} ${skewClass} ${l2View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-33 -rotate-45 lg:-top-[6%]`}
             />
             <div
-              className={`${layerBaseClass} ${skewClass} ${l3View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-[124px] -rotate-45 lg:-top-[8%]`}
+              className={`${layerBaseClass} ${skewClass} ${l3View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-31 -rotate-45 lg:-top-[8%]`}
             />
             <div
-              className={`${layerBaseClass} ${skewClass} ${l4View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-[116px] -rotate-45 lg:-top-[10%]`}
+              className={`${layerBaseClass} ${skewClass} ${l4View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 bg-pink-900/10 top-29 -rotate-45 lg:-top-[10%]`}
             />
             <div
-              className={`${layerBaseClass} ${skewClass} ${l5View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 top-[108px] -rotate-45 bg-orange-600 lg:-top-[12%]`}
+              className={`${layerBaseClass} ${skewClass} ${l5View && "-translate-x-[85%] translate-y-[50%]"} transform-gpu transition-transform duration-200 top-2777 -rotate-45 bg-orange-600 lg:-top-[12%]`}
             >
               {" "}
               <HipLogo className="fill-hip text-pink-900" />
