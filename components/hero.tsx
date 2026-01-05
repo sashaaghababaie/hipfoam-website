@@ -18,7 +18,7 @@ export const Hero = () => {
     <div
       id="top"
       ref={ref}
-      className="relative bg-zinc-300 text-gray-800 flex h-svh min-h-[500px] w-full flex-col items-center justify-center overflow-hidden bg-linear-to-t from-zinc-100"
+      className="relative bg-zinc-300 text-gray-800 flex h-svh min-h-125 w-full flex-col items-center justify-center overflow-hidden bg-linear-to-t from-zinc-100"
     >
       {/* <img
         src="/bg.png"
@@ -26,7 +26,7 @@ export const Hero = () => {
       />
  */}
 
-      <div className="absolute inset-0 mx-auto h-full max-w-[400px] opacity-90 sm:max-w-[500px]">
+      <div className="absolute inset-0 mx-auto h-full max-w-100 opacity-90 sm:max-w-125">
         <div
           dir="ltr"
           className="relative h-full w-full -translate-x-1/4 md:-translate-x-1/2"
@@ -55,13 +55,13 @@ export const Hero = () => {
             "--float-direction": "reverse",
           } as React.CSSProperties
         }
-        className="orbit-wrapper absolute aspect-square w-full max-w-[400px] min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-50 blur-sm sm:max-w-[450px]"
+        className="orbit-wrapper absolute aspect-square w-full max-w-100 min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-50 blur-sm sm:max-w-[450px]"
       >
         <div className="orbit-item h-full w-full">
           <div className="scale-up-and-orbit z-10 h-full w-full rounded-full bg-white/80 mask-[radial-gradient(circle,transparent_0%,transparent_10%,black_90%)]"></div>
         </div>
       </div>
-      <div className="orbit-wrapper absolute aspect-square w-full max-w-[400px] min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-60 blur-sm sm:max-w-[550px]">
+      <div className="orbit-wrapper absolute aspect-square w-full max-w-100 min-w-[320px] -translate-x-1/2 -translate-y-2 items-center justify-center opacity-60 blur-sm sm:max-w-[550px]">
         <div className="orbit-item h-full w-full">
           <div className="scale-up-and-orbit z-10 h-full w-full rounded-full bg-white/80 mask-[radial-gradient(circle,transparent_0%,transparent_10%,black_90%)]"></div>
         </div>
@@ -108,7 +108,7 @@ export const Hero = () => {
             </p>
             <div className="orbit-wrapper aspect-square w-[150px] transform-gpu will-change-transform">
               <div className="orbit-item">
-                <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-[200px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
+                <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-50 transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
                   <div
                     style={
                       {
@@ -120,7 +120,7 @@ export const Hero = () => {
                     className="orbit-wrapper aspect-square transform-gpu will-change-transform"
                   >
                     {/* <div className="orbit-item"> */}
-                    <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-[100px] transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
+                    <div className="scale-up-and-orbit bg-pink-900/10 group-hover:bg-hip aspect-square w-full max-w-25 transform-gpu rounded-full border-t-2 border-white/20 shadow-sm shadow-white/50 transition duration-300 will-change-transform">
                       {/* <div
                           style={
                             {

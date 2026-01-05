@@ -15,7 +15,7 @@ export default function HipDelivers() {
   }, [inView2]);
 
   return (
-    <div className="bg-white border-b-4 border-zinc-300 relative flex h-svh max-h-[800px] flex-col">
+    <div className="bg-white border-b-4 border-zinc-300 relative flex h-svh max-h-200 flex-col">
       <div ref={ref} className="absolute top-0 left-0 h-[150vh] w-full"></div>
       <div
         className={`relative top-8 flex justify-center text-black duration-1000 ${inView ? "-translate-y-24 opacity-100" : "opacity-0"}`}

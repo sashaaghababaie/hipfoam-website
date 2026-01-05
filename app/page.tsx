@@ -12,7 +12,7 @@ import Navbar from "../components/navbar";
 import { Footer } from "../components/footer";
 import { siteConfig } from "@/config/site";
 import Script from "next/script";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
 // export const metadata: Metadata = {
 //   title: "خانه",
@@ -90,6 +90,8 @@ const JSON_LD = {
   ],
 };
 
+const Divider = () => <div className="w-1/2 border-l h-44 border-zinc-300" />;
+
 export default function Home() {
   return (
     <>
@@ -123,5 +125,3 @@ export default function Home() {
     </>
   );
 }
-
-const Divider = () => <div className="w-1/2 border-l h-44 border-zinc-300" />;

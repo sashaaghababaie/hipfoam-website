@@ -10,6 +10,7 @@ const sizes = [10, 16, 30, 60, 80, 100, 120, 150, 180, 200];
 export default function Cylinder() {
   const { cnRef, elRef } = useScrollProgress({ start: 0, end: 2 });
   const { ref, inView } = useInView({ rootMargin: "100% 0px -10% 0px" });
+
   return (
     <div ref={cnRef} className="relative px-4">
       <div className="mx-auto flex min-h-svh max-w-300 flex-col border-x border-t border-slate-300 bg-white pb-24 md:max-h-200 md:flex-row md:pb-0">

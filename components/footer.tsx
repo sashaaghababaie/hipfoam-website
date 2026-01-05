@@ -1,22 +1,12 @@
 "use client";
+
 import { useEffect } from "react";
 import HipLogo from "./svg/hip-logo";
 import { siteConfig } from "@/config/site";
+import useAnchorScroll from "@/hooks/useAnchorScroll";
 
 export const Footer = () => {
-  useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      if (anchor.getAttribute("href") !== "#") {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          //@ts-expect-error cannot infer this
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      }
-    });
-  }, []);
+  useAnchorScroll();
 
   return (
     <footer dir="rtl" className="bg-hip-black min-h-44 pt-4">

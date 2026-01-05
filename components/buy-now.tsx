@@ -7,8 +7,10 @@ import { useState } from "react";
 import { Modal } from "./contact-modal";
 
 export default function BuyNow() {
-  const { elRef, cnRef } = useScrollProgress({ start: 0, end: 0.8 });
   const [showModal, setShowModal] = useState(false);
+
+  const { elRef, cnRef } = useScrollProgress({ start: 0, end: 0.8 });
+
   return (
     <div
       id="contact"

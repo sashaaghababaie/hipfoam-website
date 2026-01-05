@@ -8,6 +8,7 @@ export default function GravityPile() {
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
+
     let frameId: number;
 
     const resize = () => {

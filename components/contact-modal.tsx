@@ -1,21 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
+
+import { useRef } from "react";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScoll";
 import HipSign from "./svg/logo-sign";
 import { createPortal } from "react-dom";
 import CopyButton from "./copy-button";
-
-export function useLockBodyScroll(isOpen: boolean) {
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [isOpen]);
-}
 
 export function Modal({
   open,
@@ -25,6 +14,7 @@ export function Modal({
   onClose: () => void;
 }) {
   useLockBodyScroll(open);
+
   const boundry = useRef<HTMLDivElement>(null);
 
   const handleClick = (e: MouseEvent) => {

@@ -1,22 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import HipSign from "./svg/logo-sign";
+import useAnchorScroll from "@/hooks/useAnchorScroll";
 
 export default function Navbar() {
-  useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      if (anchor.getAttribute("href") !== "#") {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          //@ts-expect-error cannot infer this
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      }
-    });
-  }, []);
+  useAnchorScroll();
 
   return (
     <nav className="fixed flex top-0 w-full border-b justify-between border-zinc-300 bg-white/10 left-0 h-16 backdrop-blur-md z-50">

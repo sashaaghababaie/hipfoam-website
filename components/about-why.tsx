@@ -59,6 +59,7 @@ import { LazyShow } from "./lazy-show";
 export default function AboutWhy() {
   const { ref, inView } = useInView({ rootMargin: "100% 0px -10% 0px" });
   const { elRef, cnRef } = useScrollProgress({ start: 0, end: 3 });
+
   return (
     <div id="about" className="relative z-10 bg-white md:-mt-[30vh]">
       <div

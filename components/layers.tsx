@@ -10,28 +10,32 @@ const layerBaseClass =
 const skewClass = "skew-x-12 skew-y-12";
 export default function Layers() {
   const [l1, l1View] = useInView({
-    // triggerOnce: true,
     rootMargin: "100% 0px -60% 0px",
+    // triggerOnce: true,
     // threshold: Array.from({ length: 1001 }, (_, i) => i / 1000),
   });
+
   const [l2, l2View] = useInView({
     rootMargin: "100% 0px -30% 0px",
     // triggerOnce: true,
     // rootMargin: "100% 0px -10% 0px",
     // threshold: Array.from({ length: 10 }, (_, i) => i / 100),
   });
+
   const [l3, l3View] = useInView({
     rootMargin: "100% 0px -30% 0px",
     // triggerOnce: true,
     // rootMargin: "100% 0px -10% 0px",
     // threshold: Array.from({ length: 101 }, (_, i) => i / 100),
   });
+
   const [l4, l4View] = useInView({
     rootMargin: "100% 0px -30% 0px",
     // triggerOnce: true,
     // rootMargin: "100% 0px -10% 0px",
     // threshold: Array.from({ length: 101 }, (_, i) => i / 100),
   });
+
   const [l5, l5View] = useInView({
     rootMargin: "100% 0px -30% 0px",
     // triggerOnce: true,

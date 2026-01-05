@@ -10,6 +10,7 @@ import { Modal } from "./contact-modal";
 
 export default function Consultant() {
   const [showModal, setShowModal] = useState(false);
+
   const { ref, inView } = useInView({
     rootMargin: "100% 0px -30% 0px",
     triggerOnce: true,

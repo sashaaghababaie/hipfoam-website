@@ -134,6 +134,7 @@ const ProductsDesktop = () => {
 
 const ProductsMobile = () => {
   const { elRef, cnRef } = useScrollProgress({ start: 0, end: 1.5 });
+
   return (
     <div
       ref={cnRef}
